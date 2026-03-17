@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.speakeasy.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(go version:*)",
+      "Bash(go mod:*)",
+      "Bash(go build:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl:*)",
+      "Bash(go get:*)",
+      "Read(//Users/adam.huang/.tccli/**)",
+      "Bash(sed -i '' 's/tencentcloud_css_domain\\\\.test/tencentcloud_extend_css_domain.test/' /tmp/tf-test/main.tf)",
+      "Read(//private/tmp/tf-test/**)",
+      "Bash(/tmp/tf-test/main.tf:*)"
+    ]
+  }
+}

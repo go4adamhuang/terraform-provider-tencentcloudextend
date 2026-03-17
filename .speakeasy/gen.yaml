@@ -1,0 +1,15 @@
+configVersion: 2.0.0
+
+generation:
+  sdkClassName: TencentCloud
+  maintainerEmail: ""  # fill in your email
+
+terraform:
+  version: 0.0.1
+  packageName: tencentcloudextend
+  author: go4adamhuang
+
+  # Hand-written resources registered alongside Speakeasy-generated ones.
+  # These live in internal/provider/ and are wired up in provider.go manually.
+  additionalResources: []
+  additionalDataSources: []

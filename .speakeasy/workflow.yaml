@@ -1,0 +1,18 @@
+speakeasyVersion: latest
+
+sources:
+  # Add TencentCloud OpenAPI specs here. One source per API group.
+  # Example:
+  # cvm-api:
+  #   inputs:
+  #     - location: ./openapi/cvm.yaml
+  # vpc-api:
+  #   inputs:
+  #     - location: ./openapi/vpc.yaml
+
+targets:
+  # Uncomment and configure when OpenAPI specs are ready.
+  # tencentcloud-terraform:
+  #   target: terraform
+  #   source: cvm-api
+  #   output: ./generated

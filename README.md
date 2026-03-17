@@ -1,2 +1,1 @@
-# terraform-provider-tencentcloud
-Terraform Provider For Tencent Cloud
+# Terraform Provider For Tencent Cloud
