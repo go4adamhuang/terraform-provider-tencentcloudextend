@@ -28,11 +28,6 @@ type TencentCloudProviderModel struct {
 	Region    types.String `tfsdk:"region"`
 	Profile   types.String `tfsdk:"profile"`
 
-	// Separate credentials for DNSPod operations.
-	// Falls back to the main credentials if not set.
-	DNSSecretID  types.String `tfsdk:"dns_secret_id"`
-	DNSSecretKey types.String `tfsdk:"dns_secret_key"`
-	DNSProfile   types.String `tfsdk:"dns_profile"`
 }
 
 // ClientConfig holds resolved credentials passed to every resource and data source.
@@ -40,11 +35,6 @@ type ClientConfig struct {
 	SecretID  string
 	SecretKey string
 	Region    string
-
-	// DNSPod credentials (for DNS record management).
-	// Falls back to SecretID/SecretKey if not explicitly set.
-	DNSSecretID  string
-	DNSSecretKey string
 }
 
 func New(version string) func() provider.Provider {
@@ -78,19 +68,6 @@ func (p *TencentCloudProvider) Schema(_ context.Context, _ provider.SchemaReques
 			"profile": schema.StringAttribute{
 				Optional:    true,
 				Description: "tccli profile for CSS/main account. Loads credentials from ~/.tccli/<profile>.credential. Falls back to TENCENTCLOUD_PROFILE env var.",
-			},
-			"dns_secret_id": schema.StringAttribute{
-				Optional:    true,
-				Description: "Secret ID for DNSPod operations (may differ from the CSS account). Falls back to dns_profile, then to the main account credentials.",
-			},
-			"dns_secret_key": schema.StringAttribute{
-				Optional:    true,
-				Sensitive:   true,
-				Description: "Secret key for DNSPod operations. Falls back to dns_profile, then to the main account credentials.",
-			},
-			"dns_profile": schema.StringAttribute{
-				Optional:    true,
-				Description: "tccli profile for DNSPod operations. Falls back to TENCENTCLOUD_DNS_PROFILE env var, then to the main account credentials.",
 			},
 		},
 	}
@@ -138,40 +115,10 @@ func (p *TencentCloudProvider) Configure(ctx context.Context, req provider.Confi
 		region = config.Region.ValueString()
 	}
 
-	// ── DNS (DNSPod) credentials — fall back to main if not set ──
-	dnsSecretID := secretID
-	dnsSecretKey := secretKey
-
-	dnsProfileName := os.Getenv("TENCENTCLOUD_DNS_PROFILE")
-	if !config.DNSProfile.IsNull() && config.DNSProfile.ValueString() != "" {
-		dnsProfileName = config.DNSProfile.ValueString()
-	}
-	if dnsProfileName != "" {
-		pID, pKey, _, err := loadTccliProfile(dnsProfileName)
-		if err != nil {
-			resp.Diagnostics.AddError(fmt.Sprintf("Failed to load dns tccli profile %q", dnsProfileName), err.Error())
-			return
-		}
-		if pID != "" {
-			dnsSecretID = pID
-		}
-		if pKey != "" {
-			dnsSecretKey = pKey
-		}
-	}
-	if !config.DNSSecretID.IsNull() && config.DNSSecretID.ValueString() != "" {
-		dnsSecretID = config.DNSSecretID.ValueString()
-	}
-	if !config.DNSSecretKey.IsNull() && config.DNSSecretKey.ValueString() != "" {
-		dnsSecretKey = config.DNSSecretKey.ValueString()
-	}
-
 	clientCfg := &ClientConfig{
-		SecretID:     secretID,
-		SecretKey:    secretKey,
-		Region:       region,
-		DNSSecretID:  dnsSecretID,
-		DNSSecretKey: dnsSecretKey,
+		SecretID:  secretID,
+		SecretKey: secretKey,
+		Region:    region,
 	}
 
 	resp.DataSourceData = clientCfg
@@ -181,6 +128,7 @@ func (p *TencentCloudProvider) Configure(ctx context.Context, req provider.Confi
 func (p *TencentCloudProvider) Resources(_ context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		NewCssDomainResource,
+		NewCssDomainVerifyResource,
 	}
 }
 
