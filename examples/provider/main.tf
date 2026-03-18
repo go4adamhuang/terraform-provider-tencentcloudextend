@@ -5,7 +5,7 @@ terraform {
     }
     tencentcloudextend = {
       source  = "go4adamhuang/tencentcloudextend"
-      version = "~> 0.0.1"
+      version = "~> 1.0"
     }
   }
 }

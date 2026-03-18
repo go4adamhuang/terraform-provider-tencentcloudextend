@@ -13,7 +13,10 @@
       "Read(//Users/adam.huang/.tccli/**)",
       "Bash(sed -i '' 's/tencentcloud_css_domain\\\\.test/tencentcloud_extend_css_domain.test/' /tmp/tf-test/main.tf)",
       "Read(//private/tmp/tf-test/**)",
-      "Bash(/tmp/tf-test/main.tf:*)"
+      "Bash(/tmp/tf-test/main.tf:*)",
+      "Bash(tccli:*)",
+      "Bash(tccli cdn:*)",
+      "Bash(grep:*)"
     ]
   }
 }

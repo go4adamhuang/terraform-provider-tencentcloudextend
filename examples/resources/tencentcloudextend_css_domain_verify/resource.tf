@@ -3,7 +3,7 @@
 # can be added to CSS without re-verification.
 
 resource "tencentcloudextend_css_domain_verify" "hzjnf" {
-  domain_name = "hzjnf.com"
+  domain = "hzjnf.com"
 }
 
 resource "tencentcloudextend_css_domain" "pull_global" {
