@@ -128,6 +128,7 @@ func (p *TencentCloudProvider) Configure(ctx context.Context, req provider.Confi
 func (p *TencentCloudProvider) Resources(_ context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		NewCssDomainVerifyResource,
+		NewTeoPlanResource,
 	}
 }
 

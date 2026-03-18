@@ -16,7 +16,8 @@
       "Bash(/tmp/tf-test/main.tf:*)",
       "Bash(tccli:*)",
       "Bash(tccli cdn:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(make build:*)"
     ]
   }
 }

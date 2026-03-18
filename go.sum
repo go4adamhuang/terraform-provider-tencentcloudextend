@@ -53,6 +53,8 @@ github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/dnspod v1.3.59 h1:LAHtv
 github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/dnspod v1.3.59/go.mod h1:LYzlf3uCnG80mf1wy4ZFOS1vOlNi3NR71kG6dEMtOWA=
 github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/live v1.3.57 h1:Wkst9O16bmF1OiEHJkGvVYC11YUxKFV78yUVlXX6eOs=
 github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/live v1.3.57/go.mod h1:Zhqc9GTnV1+TLimRiRT6K8U2QKgpwmzO3v5yrxjgIc4=
+github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/teo v1.3.57 h1:W8bHte7bmrVeWHIu2b/cJYpaYV69qECFdwfkLuWmcvE=
+github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/teo v1.3.57/go.mod h1:7ZTBubOZg2+/eGxFZgwfLAXPtyMd8FjovKe9Gn4M1ew=
 github.com/vmihailenco/msgpack/v5 v5.4.1 h1:cQriyiUvjTwOHg8QZaPihLWeRAAVoCpE00IUPn0Bjt8=
 github.com/vmihailenco/msgpack/v5 v5.4.1/go.mod h1:GaZTsDaehaPpQVyxrf5mtQlH+pc21PIudVV/E3rRQok=
 github.com/vmihailenco/tagparser/v2 v2.0.0 h1:y09buUbR+b5aycVFQs/g70pqKVZNBmxwAhO7/IwNM9g=
