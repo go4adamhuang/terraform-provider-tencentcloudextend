@@ -16,25 +16,49 @@ Tencent Cloud CSS requires you to prove ownership of a domain before adding any 
 1. Create this resource with your root domain (or any subdomain under it).
 2. Read the computed `verify_content` value.
 3. Create a DNS TXT record: `cssauth.<main_domain>` → `<verify_content>`.
-4. Create [`tencentcloudextend_css_domain`](css_domain.md) resources with `depends_on` pointing to this resource.
+4. Create `tencentcloud_css_domain` resources (from the [official provider](https://registry.terraform.io/providers/tencentcloudstack/tencentcloud/latest/docs/resources/css_domain)) with `depends_on` pointing to this resource.
 
 -> **Note:** This resource calls the `AuthenticateDomainOwner` API to retrieve the verification content. It does **not** perform or confirm verification — that is determined by whether the DNS record is in place when Tencent Cloud checks it.
+
+-> **Cross-account use case:** This resource is designed for scenarios where domain ownership verification is managed by a different Tencent Cloud account than the one managing CSS domains. Configure this provider with the account that owns the domain, and use the official `tencentcloud` provider for CSS domain management.
 
 ## Example Usage
 
 ```terraform
+terraform {
+  required_providers {
+    tencentcloudextend = {
+      source  = "go4adamhuang/tencentcloudextend"
+      version = "~> 1.0"
+    }
+    tencentcloud = {
+      source  = "tencentcloudstack/tencentcloud"
+      version = "~> 1.81"
+    }
+  }
+}
+
+# This provider uses the account that owns the domain (for verification)
+provider "tencentcloudextend" {
+  profile = "dns-account"
+}
+
+# This provider uses the account that manages CSS
+provider "tencentcloud" {
+  profile = "css-account"
+}
+
+# Step 1: retrieve the DNS TXT verification value
 resource "tencentcloudextend_css_domain_verify" "example" {
   domain = "example.com"
 }
 
-# Set the DNS TXT record using the output value:
-# cssauth.example.com → tencentcloudextend_css_domain_verify.example.verify_content
-output "css_verify_content" {
-  value = tencentcloudextend_css_domain_verify.example.verify_content
-}
+# Step 2: set cssauth.<main_domain> TXT record with verify_content
+# (using your DNS provider's Terraform resource)
 
-resource "tencentcloudextend_css_domain" "pull_global" {
-  domain_name = "pull-global.example.com"
+# Step 3: add CSS domains using the official provider, after verification
+resource "tencentcloud_css_domain" "pull_global" {
+  domain_name = "pull.example.com"
   domain_type = 1
   play_type   = 2
 
