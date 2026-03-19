@@ -382,8 +382,11 @@ func (r *TeoZoneResource) refresh(_ context.Context, m *TeoZoneModel, diags *dia
 	if z.Status != nil {
 		m.Status = types.StringValue(*z.Status)
 	}
-	if z.AliasZoneName != nil {
+	// alias_zone_name: preserve null if not set by user and API returns empty
+	if z.AliasZoneName != nil && *z.AliasZoneName != "" {
 		m.AliasZoneName = types.StringValue(*z.AliasZoneName)
+	} else if m.AliasZoneName.IsNull() || m.AliasZoneName.IsUnknown() {
+		m.AliasZoneName = types.StringNull()
 	} else {
 		m.AliasZoneName = types.StringValue("")
 	}
@@ -398,7 +401,7 @@ func (r *TeoZoneResource) refresh(_ context.Context, m *TeoZoneModel, diags *dia
 		m.PlanID = types.StringValue(*z.Resources[0].Id)
 	}
 
-	// tags
+	// tags: preserve null if not set by user and API returns empty
 	if len(z.Tags) > 0 {
 		tagMap := make(map[string]attr.Value, len(z.Tags))
 		for _, t := range z.Tags {
@@ -407,6 +410,8 @@ func (r *TeoZoneResource) refresh(_ context.Context, m *TeoZoneModel, diags *dia
 			}
 		}
 		m.Tags = types.MapValueMust(types.StringType, tagMap)
+	} else if m.Tags.IsNull() || m.Tags.IsUnknown() {
+		m.Tags = types.MapNull(types.StringType)
 	} else {
 		m.Tags = types.MapValueMust(types.StringType, map[string]attr.Value{})
 	}
