@@ -129,6 +129,7 @@ func (p *TencentCloudProvider) Resources(_ context.Context) []func() resource.Re
 	return []func() resource.Resource{
 		NewCssDomainVerifyResource,
 		NewTeoPlanResource,
+		NewTeoZoneResource,
 	}
 }
 

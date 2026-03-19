@@ -17,7 +17,9 @@
       "Bash(tccli:*)",
       "Bash(tccli cdn:*)",
       "Bash(grep:*)",
-      "Bash(make build:*)"
+      "Bash(make build:*)",
+      "WebFetch(domain:registry.terraform.io)",
+      "Bash(sed -n '1419,1445p' ~/go/pkg/mod/github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/teo@v1.3.57/v20220901/models.go\nsed -n '5673,5700p' ~/go/pkg/mod/github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/teo@v1.3.57/v20220901/models.go\nsed -n '19822,19850p' ~/go/pkg/mod/github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/teo@v1.3.57/v20220901/models.go)"
     ]
   }
 }
