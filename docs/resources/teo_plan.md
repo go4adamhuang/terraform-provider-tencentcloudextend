@@ -38,8 +38,10 @@ resource "tencentcloudextend_teo_plan" "enterprise" {
   plan_type = "enterprise"
 }
 
-resource "tencentcloud_teo_zone" "example" {
+resource "tencentcloudextend_teo_zone" "example" {
   zone_name = "example.com"
+  type      = "dnsPodAccess"
+  area      = "global"
   plan_id   = tencentcloudextend_teo_plan.enterprise.plan_id
 }
 ```
