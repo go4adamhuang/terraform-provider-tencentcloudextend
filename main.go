@@ -5,7 +5,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/go4adamhuang/terraform-provider-tencentcloud/internal/provider"
+	"github.com/go4adamhuang/terraform-provider-tencentcloudextend/internal/provider"
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
 

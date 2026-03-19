@@ -1,4 +1,4 @@
-module github.com/go4adamhuang/terraform-provider-tencentcloud
+module github.com/go4adamhuang/terraform-provider-tencentcloudextend
 
 go 1.22.0
 

@@ -8,8 +8,8 @@ A **supplemental** Terraform provider for Tencent Cloud — adding resources/dat
 
 Uses **Speakeasy** for OpenAPI-spec-driven code generation where TencentCloud API specs are available, with hand-written resources alongside.
 
-Provider name: `tencentcloud_extend` (source: `go4adamhuang/tencentcloud-extend`)
-Module path: `github.com/go4adamhuang/terraform-provider-tencentcloud`
+Provider name: `tencentcloudextend` (source: `go4adamhuang/tencentcloudextend`)
+Module path: `github.com/go4adamhuang/terraform-provider-tencentcloudextend`
 
 ## Commands
 
